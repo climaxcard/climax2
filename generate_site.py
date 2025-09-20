@@ -533,15 +533,6 @@ nav a:hover{ background:rgba(0,0,0,.05); }
   #buy .buy-table td{ width: 72% !important; /* 右カラムを広く */ word-break: break-word; /* 長文でもはみ出さない */ }
 }
 
-/* === SP: yusoudragon を“見切れゼロ＆大きく”表示（固定比率を外す） === */
-@media (max-width: 900px){
-  #buy .buy-cta{ margin-top: 6px !important; }
-  /* 箱の固定比率を解除して高さを自動に */
-  #buy .buy-cta-link{ aspect-ratio: auto !important; height: auto !important; }
-  /* 画像は通常フローで 100% 幅・高さは自動。トリムや変形を無効化 */
-  #buy .buy-cta-img{ position: static !important; inset: auto !important; width: 100% !important; height: auto !important; object-fit: contain !important; object-position: center center !important; clip-path: none !important; transform: none !important; image-rendering: auto !important; }
-}
-
 /* === SP（～900px）: HOMEの「営業時間」「買取受付時間」を2行に収める === */
 @media (max-width: 900px){
   /* 見出し列を少しだけ細くして本文側の横幅を確保 */
@@ -574,7 +565,6 @@ nav a:hover{ background:rgba(0,0,0,.05); }
     overflow: hidden; line-height: 1.35; word-break: break-word;
   }
 }
-
 /* === SP（～900px）: HOME 情報テーブルの収まり最適化（省略なし狙い） === */
 @media (max-width: 900px){
   /* 横幅の稼ぎ：左右パディングを少しだけ削る */
@@ -589,28 +579,25 @@ nav a:hover{ background:rgba(0,0,0,.05); }
   /* 営業時間/買取受付時間（2行以内）を収めやすく */
   #home .info-table .clamp-2{ display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; /* 最大2行 */ overflow: hidden; line-height: 1.28; font-size: .95em; /* さらに微縮小 */ word-break: break-word; }
 }
-/* 営業時間/買取受付：スマホは2行で時間を縦位置そろえ、PCは1行 */
-.info-time{ display:flex; gap:12px; flex-wrap:wrap; align-items:baseline; }
-.info-time .row{ display:flex; gap:.4em; }
-.info-time .label{ font-weight:700; white-space:nowrap; }
-.info-time .time{ white-space:nowrap; }
-
-@media (max-width:900px){
-  .info-time{
-    display:grid;                     /* ← 2列グリッドで”数字の列”をそろえる */
-    grid-template-columns: 6em 1fr;   /* 左=ラベル固定幅 / 右=時間 */
-    row-gap: 2px;
+/* === FINAL OVERRIDE: SP yusoudragon 強制トリム === */
+@media (max-width: 900px){
+  /* 箱は低め比率で上下を切る前提 */
+  #buy .buy-cta-link{
+    aspect-ratio: 16/7 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    position: relative !important;
   }
-  .info-time .row{ display:contents; }/* 子要素を直接セルに配置して揃える */
-  .info-time .label{ text-align:right; padding-right:8px; }
-}
-
-/* PCは1行で「/」区切りにして読みやすく */
-@media (min-width:901px){
-  .info-time .row + .row::before{
-    content:" / ";
-    margin:0 6px;
-    color:#666;
+  /* 画像は全面に敷いて上下カット */
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;            /* ← これで上下トリムの土台 */
+    object-position: 50% 50% !important;     /* 右に寄せたければ 52–55% に */
+    clip-path: inset(14% 0 14% 0) !important;/* ← ここで上下カット量を微調整(10–20%) */
+    transform: none !important;              /* 余計な拡大/平行移動は無効化 */
   }
 }
 
@@ -649,7 +636,9 @@ nav a:hover{ background:rgba(0,0,0,.05); }
         </div>
 
         <div class="home-side" id="homeSide">
-          <a class="home-card navlink" data-section="storebuy" href="#storebuy"><img src="${POP_MYCALINKS_IMG}" alt="店頭買取案内"></a>
+          <a class="home-card navlink" data-section="buy" href="#buy">
+  <img src="${POP_MYCALINKS_IMG}" alt="郵送買取案内">
+</a>
           <a class="home-card" href="${SHOP_URL}" target="_blank"><img src="${POP_TOREKA_IMG}" alt="通販POP"></a>
         </div>
       </div>
@@ -1096,65 +1085,6 @@ show(location.hash.replace('#','')||'home', false);
   }
   apply();
   mq.addEventListener ? mq.addEventListener('change', apply) : window.addEventListener('resize', apply);
-})();
-(function(){
-  function enhanceFor(thText){
-    const rows = Array.from(document.querySelectorAll('#home .info-table tr'));
-    const tr = rows.find(tr => {
-      const th = tr.querySelector('th');
-      return th && th.textContent.replace(/\s/g,'').includes(thText);
-    });
-    if(!tr) return;
-    const td = tr.querySelector('td');
-    if(!td || td.querySelector('.info-time')) return; // 既に変換済み
-
-    const raw = td.textContent.replace(/\s+/g,''); // 空白除去
-    const times = raw.match(/\d{1,2}:\d{2}～\d{1,2}:\d{2}/g);
-    if(!times || times.length < 2) return;
-
-    const idx1 = raw.indexOf(times[0]);
-    const idx2 = raw.indexOf(times[1]);
-
-    let label1 = raw.slice(0, idx1);
-    let label2 = raw.slice(idx1 + times[0].length, idx2);
-
-    const clean = (s)=>{
-      s = (s||'')
-        .replace(/[\d:～／/]/g,'')     // 時刻や区切りを除去
-        .replace(/曜日/g,'')
-        .replace(/^[・･\s]+|[・･\s]+$/g,'');
-      s = s.replace(/日[・･]?\s*祝/,'日・祝'); // 日祝/日・祝 を正規化
-      s = s.replace(/月～?土曜日?/,'月～土');  // 月～土曜日 → 月～土
-      if(!s) s = '月～土';
-      return s;
-    };
-
-    label1 = clean(label1);
-    label2 = clean(label2 || '日・祝');
-
-    // DOM構築（テンプレ内で `${}` が絡まないよう文字連結で生成）
-    const wrap = document.createElement('div');
-    wrap.className = 'info-time';
-
-    const r1 = document.createElement('div'); r1.className = 'row';
-    const l1 = document.createElement('span'); l1.className = 'label'; l1.textContent = label1;
-    const t1 = document.createElement('span'); t1.className = 'time';  t1.textContent = times[0];
-    r1.append(l1, t1);
-
-    const r2 = document.createElement('div'); r2.className = 'row';
-    const l2 = document.createElement('span'); l2.className = 'label'; l2.textContent = label2;
-    const t2 = document.createElement('span'); t2.className = 'time';  t2.textContent = times[1];
-    r2.append(l2, t2);
-
-    wrap.append(r1, r2);
-
-    // セル置換（元のテンプレは編集しない）
-    td.textContent = '';
-    td.appendChild(wrap);
-  }
-
-  enhanceFor('営業時間');
-  enhanceFor('買取受付時間');
 })();
 </script>
 </body>
