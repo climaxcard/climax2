@@ -771,6 +771,34 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
     /* text-overflow: ellipsis; */
   }
 }
+/* === SP（～900px）: HOME 情報テーブルのクランプ調整 === */
+@media (max-width: 900px){
+  /* 右セルに少しでも横幅を渡す（見出し側を少し細く） */
+  #home .info-table th{
+    width: 6.6em;           /* 7.5em → 少し細く */
+    padding-right: 8px;
+  }
+
+  /* 共通：2行クランプ用 */
+  #home .info-table .clamp-2{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;   /* 最大2行 */
+    overflow: hidden;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  /* 共通：3行クランプ用 */
+  #home .info-table .clamp-3{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;   /* 最大3行 */
+    overflow: hidden;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+}
 </style>
 </head>
 <body>
@@ -822,12 +850,27 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
           <h3>店舗基本情報</h3>
           <table class="info-table">
             <tr><th>所在地</th><td>〒101-0021<br>東京都千代田区外神田3-15-5 MNビル 3F</td></tr>
-            <tr><th>アクセス</th><td>秋葉原駅より秋葉原電気街口を御徒町方面に出て徒歩5分　毎日営業中</td></tr>
+            <tr>
+    <th>アクセス</th>
+    <td><span class="clamp-3">
+      秋葉原駅より秋葉原電気街口を御徒町方面に出て徒歩5分　毎日営業中
+    </span></td>
+  </tr>
             <tr><th>デュエルスペース</th><td>64席　無料で利用可能！！</td></tr>
             <tr><th>TEL</th><td>070-9160-3270</td></tr>
-            <tr><th>営業時間</th><td>月～土曜日11:00～20:00・日祝11:00～19:00</td></tr>
-            <tr><th>買取受付時間</th><td>月～土曜日11:00～19:00・日祝11:00～18:00</td></tr>
-          </table>
+            <tr>
+    <th>営業時間</th>
+    <td><span class="clamp-2">
+      月～土曜日11:00～20:00・日祝11:00～19:00
+    </span></td>
+  </tr>
+            <tr>
+    <th>買取受付時間</th>
+    <td><span class="clamp-2">
+      月～土曜日11:00～19:00・日祝11:00～18:00
+    </span></td>
+  </tr>
+</table>
         </div>
         <div class="panel">
           <h3>ご利用可能な決済</h3>
