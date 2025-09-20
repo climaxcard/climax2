@@ -304,103 +304,98 @@
   margin:3px 0;               /* 箇条書きの行間も詰める */
 }
 
-/* 右カラムどうしのスキマも少しだけ縮める */
-@media (min-width:900px){
-  .duel-stack{ gap:10px; }    /* 14px → 10px */
+/* =========================
+   Duel（PC調整）
+========================= */
+/* 右カラムどうしのスキマ少し縮める */
+@media (min-width: 900px){
+  .duel-stack{ gap:10px; } /* 14px → 10px */
 }
-/* --- Duel: 画像枠をもう少し上へ（余白カット） --- */
-#duel .duel-image{ margin:0 !important; }      /* figure 既定マージン除去 */
-#duel h2{ margin:0 0 8px !important; }         /* 見出し下を少し詰める */
-#duel .container{ padding-top:12px !important; }/* セクション上パディング控えめ */
-/* === BUY（郵送買取）: テーブルと画像を2カラム、左は短め幅 === */
+/* 画像枠まわりの余白をタイトに */
+#duel .duel-image{ margin:0 !important; }          /* figure 既定マージン除去 */
+#duel h2{ margin:0 0 8px !important; }             /* 見出し下を少し詰める */
+#duel .container{ padding-top:12px !important; }   /* セクション上パディング控えめ */
+
+
+/* =========================
+   BUY（郵送買取） PCレイアウト
+========================= */
 #buy .buy-layout{
-  display:grid;
-  grid-template-columns:minmax(320px,560px) minmax(220px,1fr);
-  gap:16px; align-items:start;
+  display: grid;
+  grid-template-columns: minmax(320px,560px) minmax(220px,1fr);
+  gap: 16px;
+  align-items: start;
 }
 
 /* 左：表とバナーを同じ幅で束ねる */
 #buy .buy-card{
-  width:100%;
-  max-width:560px;          /* ここを 520/480 に下げるとさらに短くできます */
+  width: 100%;
+  max-width: 560px; /* 520/480 に下げるとさらに短くできます */
 }
 
 /* 表はラッパー幅いっぱい＝「短い枠」 */
 #buy .buy-table{
-  width:100% !important;    /* ラッパーに合わせる */
-  table-layout:fixed;
+  width: 100% !important;
+  table-layout: fixed;
 }
 
 /* 右：郵送POPは小さめ */
 #buy .buy-pop{
-  width:100%; max-width:480px; height:auto;
-  border:1px solid #e5e7eb; border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
+
 /* 注意事項：ベース */
 #buy .buy-notes.panel{
-  margin:16px 0 0;
-  padding:16px;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  background:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  margin: 16px 0 0;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
 }
 
-/* PCだけ：右から10%削る＋少し上げる */
-@media (min-width:900px){
+/* PCだけ：注意事項を右から少し削る */
+@media (min-width: 900px){
   #buy .buy-notes.panel{
-    width:85.3%;            /* 全体の90%幅＝右を10%削った見え方 */
-    margin:-8px 10% 0 0;  /* 上-8px / 右10% / 下0 / 左0 */
+    width: 85.3%;
+    margin: -8px 10% 0 0; /* 上-8 / 右10% / 下0 / 左0 */
   }
 }
 
-/* SP は全幅 */
-@media (max-width:899px){
-  #buy .buy-notes.panel{
-    width:100%;
-    margin:12px 0 0;
-  }
-}
-/* === PCだけ：店頭買取／郵送買取セクションを右にずらす === */
+/* PCだけ：店頭買取／郵送買取セクションを右にずらす */
 @media (min-width: 900px){
   #storebuy,
-  #buy {
-    width: 80%;          /* 横幅を少し狭くする */
-    margin-left: 16%;    /* 左に20%の余白を取って右寄せ */
-    margin-right: 0;     /* 念のため右余白は0に */
-  }
-}
-/* === PCだけ：ヘッダー中身（ロゴ＋ナビ）を20%右へ === */
-@media (min-width: 900px){
-  header .h-inner{
-    max-width: none !important; /* 中央寄せのauto制御を解除 */
-    width: 80% !important;      /* 中身の横幅を80%に */
-    margin-left: 19.5% !important;/* 左に20%の余白を作って全体を右へ */
-    margin-right: 0 !important;
-  }
-}
-/* === PCだけ：ナビの文字とXアイコンを1.2倍 === */
-@media (min-width: 900px){
-  /* 各タブ（HOME〜通販サイト） */
-  header nav { gap: 8px !important; }                /* 6 → 8px（少し広げる） */
-  header nav a{
-    font-size: 1.2em !important;                     /* 文字を1.2倍 */
-    padding: 10px 12px !important;                   /* 8x10 → 10x12 に微増 */
-    border-radius: 12px !important;                  /* 少しだけ丸みも増やす（任意） */
-  }
-  /* 通販ボタンは横幅も少し余裕 */
-  header nav a.cta{
-    padding: 10px 16px !important;                   /* 見栄え用に横だけさらに+4px */
-  }
-  /* Xアイコン画像（28px → 約34px） */
-  header .x-icon-img{
-    width: 34px !important;
-    height: 34px !important;
+  #buy{
+    width: 80%;
+    margin-left: 16%;
+    margin-right: 0;
   }
 }
 
-/* 余白や枠はナシのまま */
+/* PCだけ：ヘッダー中身（ロゴ＋ナビ）を右へ & ナビ拡大 */
+@media (min-width: 900px){
+  header .h-inner{
+    max-width: none !important;
+    width: 80% !important;
+    margin-left: 19.5% !important;
+    margin-right: 0 !important;
+  }
+  header nav{ gap: 8px !important; }
+  header nav a{
+    font-size: 1.2em !important;
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+  }
+  header nav a.cta{ padding: 10px 16px !important; }
+  header .x-icon-img{ width:34px !important; height:34px !important; }
+}
+
+/* 余白や枠はナシのまま（yusoudragonラッパー） */
 #buy .buy-cta{
   margin-top: 0;
   border: none !important;
@@ -411,124 +406,91 @@
 
 /* PC時、左カラム幅に自然に収まるように */
 @media (min-width: 900px){
-  #buy .addr-cta { max-width: 560px; }
+  #buy .addr-cta{ max-width: 560px; }
 }
-/* === BUY（郵送買取） === */
+
+/* yusoudragon のベース（比率ボックス） */
 #buy .buy-cta-link{
   position: relative;
   display: block;
   width: 100%;
   aspect-ratio: var(--cta-ar);
-  overflow: hidden; /* 切り抜きが枠からはみ出さないように */
+  overflow: hidden;
 }
 
+/* yusoudragon のPC側（演出あり） */
 #buy .buy-cta-img{
   position: absolute; inset: 0;
   width: 100%; height: 100%; display: block;
   object-fit: cover;
   clip-path: inset(10% 0 10% 0);
-
-  /* 右へ寄せ + 上へ寄せ */
   transform: translate(1.5%, -8%) scale(1.2);
   transform-origin: center center;
 }
-/* === SPだけ：BUYを縦並び & 余白圧縮 & yusoudragon右寄せ＋上下トリム === */
-@media (max-width: 900px){
 
-  /* BUYは縦積み（表 → mail_buy → yusoudragon → 注意事項） */
+
+/* =========================
+   BUY（郵送買取） SPレイアウト（～900px）
+========================= */
+@media (max-width: 900px){
+  /* スマホは縦積み（表 → mail_buy → yusoudragon → 注意事項） */
   #buy .buy-layout{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;                 /* ← グリッドの隙間を小さく */
+    gap: 8px;
     align-items: start;
   }
   #buy .buy-card{ order: 1; }
   #buy .buy-right{ order: 2; }
 
-  /* 表の上マージン＆行間の隙間を圧縮（発送先住所〜ボタン間の“空白”対策） */
+  /* テーブルの行間をやや詰める */
   #buy .buy-table{
-    margin-top: 8px !important;          /* 16px → 8px */
+    margin-top: 8px !important;
     border-collapse: separate !important;
-    border-spacing: 0 4px !important;    /* 0 8px → 0 4px（行間を半分） */
+    border-spacing: 0 4px !important; /* 0 8px → 0 4px */
   }
 
-  /* mail_buy 画像は横幅いっぱい・等倍描画（ガビ防止） */
+  /* ★テーブル内だけ 30:70（左ラベルを狭く、右本文を広く） */
+  #buy .buy-table th{
+    width: 28% !important;
+    white-space: nowrap;
+    padding-right: 8px;
+  }
+  #buy .buy-table td{
+    width: 72% !important;
+    word-break: break-word;
+  }
+
+  /* mail_buy 画像は等倍描画 */
   #buy .buy-right img,
   #buy .buy-pop{
     width: 100% !important;
     max-width: none !important;
     height: auto !important;
     display: block !important;
-    image-rendering: auto !important;
     object-fit: contain !important;
-  }
-
-  /* yusoudragon（SP専用）：高さを低めに、右寄せ、上下トリムで“余白感”を削る */
-  #buy .buy-cta{ margin-top: 6px !important; }
-
-  #buy .buy-cta-link{
-    position: relative !important;
-    display: block !important;
-    width: 100% !important;
-    aspect-ratio: 16/7 !important;   /* ← 16/9より“低い”比率。縦の余白を減らすキモ */
-    overflow: hidden !important;
-  }
-
-  #buy .buy-cta-img{
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-
-    /* 右寄せ＋上下トリム＋軽い拡大 */
-    object-fit: cover !important;
-    object-position: 48% center !important;   
-    transform: translateX(1.5%) scale(1.2) !important; /* ← さらに少し右へ寄せつつ1.2倍 */
-    transform-origin: center center !important;
-    clip-path: inset(12% 0 12% 0) !important; /* ← 上下をカット（15～25%で微調整可） */
-
     image-rendering: auto !important;
   }
 
-  /* 注意事項：右から削る指定はそのまま活かす */
-  #buy .buy-notes.panel{
-    width: 90% !important;
-    margin: 12px 12% 0 0 !important; /* 上12 / 右12% / 下0 / 左0 */
-  }
-}
-/* SP（～900px）で buy-table の列幅を 30:70 にする */
-@media (max-width: 900px){
-  #buy .buy-table{
-    table-layout: fixed;         /* 列幅を固定的に解釈させる */
-    width: 100%;
-  }
-  #buy .buy-table th{
-    width: 28% !important;       /* 左カラム（ラベル）を狭く */
-    white-space: nowrap;          /* 「発送」などは1行で */
-    padding-right: 8px;           /* 右詰め気味で余白を軽く */
-  }
-  #buy .buy-table td{
-    width: 72% !important;       /* 右カラムを広く */
-    word-break: break-word;       /* 長文でもはみ出さない */
-  }
-}
-/* === SP: yusoudragon を見切れゼロで表示 === */
-@media (max-width: 900px){
+  /* yusoudragon：見切れゼロ（contain）※画像・レイアウト位置は不変 */
   #buy .buy-cta-link{
-    /* 固定比率を外すなら次の1行をON（余白が自然に伸び縮み） */
-    /* aspect-ratio: auto !important; */
-    background:#fff; /* レターボックスの色 */
+    background: #fff; /* レターボックス色 */
   }
   #buy .buy-cta-img{
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain !important;   /* ← 全体表示 */
+    object-fit: contain !important;
     object-position: center center !important;
     clip-path: none !important;
     transform: none !important;
+  }
+
+  /* 注意事項：右を少し削る（SPでもPCの視覚揃えを踏襲） */
+  #buy .buy-notes.panel{
+    width: 90% !important;
+    margin: 12px 12% 0 0 !important; /* 上12 / 右12% / 下0 / 左0 */
   }
 }
 </style>
@@ -561,7 +523,7 @@
     <div class="container">
       <div class="home-grid">
         <div class="carousel" id="carousel" aria-roledescription="carousel">
-          <div class="track" id="track"><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide1.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide2.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide3.png" alt="HOMEスライド">  </a></div></div>
+          <div class="track" id="track"><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide1.PNG" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide2.PNG" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide3.PNG" alt="HOMEスライド">  </a></div></div>
           <button class="ctrl prev" id="prev" aria-label="前へ">&#9664;</button>
           <button class="ctrl next" id="next" aria-label="次へ">&#9654;</button>
           <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
