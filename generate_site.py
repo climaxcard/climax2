@@ -910,17 +910,23 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
             <tr><th>デュエルスペース</th><td>64席　無料で利用可能！！</td></tr>
             <tr><th>TEL</th><td>070-9160-3270</td></tr>
             <tr>
-    <th>営業時間</th>
-    <td><span class="clamp-2">
-      月～土曜日11:00～20:00・日祝11:00～19:00
-    </span></td>
-  </tr>
-            <tr>
-    <th>買取受付時間</th>
-    <td><span class="clamp-2">
-      月～土曜日11:00～19:00・日祝11:00～18:00
-    </span></td>
-  </tr>
+  <th>営業時間</th>
+  <td>
+    <div class="info-time">
+      <div class="row"><span class="label">月～土</span><span class="time">11:00～20:00</span></div>
+      <div class="row"><span class="label">日・祝</span><span class="time">11:00～19:00</span></div>
+    </div>
+  </td>
+</tr>
+<tr>
+  <th>買取受付時間</th>
+  <td>
+    <div class="info-time">
+      <div class="row"><span class="label">月～土</span><span class="time">11:00～19:00</span></div>
+      <div class="row"><span class="label">日・祝</span><span class="time">11:00～18:00</span></div>
+    </div>
+  </td>
+</tr>
 </table>
         </div>
         <div class="panel">
