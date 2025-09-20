@@ -79,7 +79,9 @@
   .carousel{ position:relative; overflow:hidden; border-radius:18px; border:1px solid #e5e7eb; background:#fff; box-shadow:var(--soft); }
   .track{ position:relative; z-index:1; display:flex; transition:transform .5s ease; align-items:stretch; }
   .slide{ position:relative; min-width:100%; }
-  .slide.fit > img{ width:100%; height:auto; display:block; object-fit:contain; object-position:center center; background:transparent; -webkit-user-drag:none; user-select:none; }
+  .slide.fit a{ display:block; }
+.slide.fit img{
+ width:100%; height:auto; display:block; object-fit:contain; object-position:center center; background:transparent; -webkit-user-drag:none; user-select:none; }
   .ctrl{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(17,17,17,.6); color:#fff; border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; }
   .prev{ left:10px; } .next{ right:10px; }
   .dots{ position:absolute; left:0; right:0; bottom:8px; display:flex; gap:6px; justify-content:center; z-index:2; }
@@ -511,6 +513,24 @@
     word-break: break-word;       /* 長文でもはみ出さない */
   }
 }
+/* === SP: yusoudragon を見切れゼロで表示 === */
+@media (max-width: 900px){
+  #buy .buy-cta-link{
+    /* 固定比率を外すなら次の1行をON（余白が自然に伸び縮み） */
+    /* aspect-ratio: auto !important; */
+    background:#fff; /* レターボックスの色 */
+  }
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;   /* ← 全体表示 */
+    object-position: center center !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -541,7 +561,7 @@
     <div class="container">
       <div class="home-grid">
         <div class="carousel" id="carousel" aria-roledescription="carousel">
-          <div class="track" id="track"><div class="slide fit"><img src="slide1.png" alt="HOMEスライド"></div><div class="slide fit"><img src="slide2.png" alt="HOMEスライド"></div><div class="slide fit"><img src="slide3.png" alt="HOMEスライド"></div></div>
+          <div class="track" id="track"><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide1.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide2.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide3.png" alt="HOMEスライド">  </a></div></div>
           <button class="ctrl prev" id="prev" aria-label="前へ">&#9664;</button>
           <button class="ctrl next" id="next" aria-label="次へ">&#9654;</button>
           <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>

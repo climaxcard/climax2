@@ -20,6 +20,7 @@ ADDRESS      = "〒101-0021 東京都千代田区外神田3-15-5 MNビル 3F"
 SHOP_URL     = "https://www.climax-card.jp/"
 BUYLIST_URL  = "https://climaxcard.github.io/climax/default/"
 X_URL        = "https://x.com/climaxcard"
+PRODUCTS_URL = "https://www.climax-card.jp/product-list/345"
 
 MAP_EMBED_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12959.948330384788!2d139.7712742631493!3d35.70193548613032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c1dd8a0a351%3A0x521f149db8f31043!2z44CSMTAxLTAwMjEg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy65aSW56We55Sw77yT5LiB55uu77yR77yV4oiS77yV!5e0!3m2!1sja!2sjp!4v1758198516772!5m2!1sja!2sjp"
 
@@ -165,11 +166,25 @@ def site_name(p: Path) -> str:
     return (OUT / p.name).name
 
 if slides_paths:
-    SLIDES_HTML = "".join(f'<div class="slide fit"><img src="{site_name(p)}" alt="HOMEスライド"></div>' for p in slides_paths)
+    SLIDES_HTML = "".join(
+        f'<div class="slide fit">'
+        f'  <a class="slide-link" href="{PRODUCTS_URL}" target="_blank" rel="noopener" aria-label="商品一覧へ">'
+        f'    <img src="{site_name(p)}" alt="HOMEスライド">'
+        f'  </a>'
+        f'</div>'
+        for p in slides_paths
+    )
     DOTS_HTML   = "".join('<div class="dot"></div>' for _ in slides_paths)
 else:
-    SLIDES_HTML = f'<div class="slide fit"><img src="{LOGO_IMG}" alt="HOMEスライド"></div>'
+    SLIDES_HTML = (
+        f'<div class="slide fit">'
+        f'  <a class="slide-link" href="{PRODUCTS_URL}" target="_blank" rel="noopener" aria-label="商品一覧へ">'
+        f'    <img src="{LOGO_IMG}" alt="HOMEスライド">'
+        f'  </a>'
+        f'</div>'
+    )
     DOTS_HTML   = '<div class="dot active"></div>'
+
 
 X_ICON_HTML = f'<img src="{X_ICON_IMG}" alt="X" class="x-icon-img" onerror="this.style.display=\'none\'">' if X_ICON_IMG else ""
 
@@ -287,7 +302,9 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
   .carousel{ position:relative; overflow:hidden; border-radius:18px; border:1px solid #e5e7eb; background:#fff; box-shadow:var(--soft); }
   .track{ position:relative; z-index:1; display:flex; transition:transform .5s ease; align-items:stretch; }
   .slide{ position:relative; min-width:100%; }
-  .slide.fit > img{ width:100%; height:auto; display:block; object-fit:contain; object-position:center center; background:transparent; -webkit-user-drag:none; user-select:none; }
+  .slide.fit a{ display:block; }
+.slide.fit img{
+ width:100%; height:auto; display:block; object-fit:contain; object-position:center center; background:transparent; -webkit-user-drag:none; user-select:none; }
   .ctrl{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(17,17,17,.6); color:#fff; border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; }
   .prev{ left:10px; } .next{ right:10px; }
   .dots{ position:absolute; left:0; right:0; bottom:8px; display:flex; gap:6px; justify-content:center; z-index:2; }
@@ -717,6 +734,24 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
   #buy .buy-table td{
     width: 72% !important;       /* 右カラムを広く */
     word-break: break-word;       /* 長文でもはみ出さない */
+  }
+}
+/* === SP: yusoudragon を見切れゼロで表示 === */
+@media (max-width: 900px){
+  #buy .buy-cta-link{
+    /* 固定比率を外すなら次の1行をON（余白が自然に伸び縮み） */
+    /* aspect-ratio: auto !important; */
+    background:#fff; /* レターボックスの色 */
+  }
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;   /* ← 全体表示 */
+    object-position: center center !important;
+    clip-path: none !important;
+    transform: none !important;
   }
 }
 </style>
