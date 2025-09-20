@@ -703,38 +703,10 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
     margin: 12px 12% 0 0 !important; /* 上12 / 右12% / 下0 / 左0 */
   }
 }
-/* === SP(～900px)で BUY を 30:70 の2カラムに === */
+/* === SP時：BUY 左右の幅だけ 30:70 にする（他は触らない） === */
 @media (max-width: 900px){
-  /* 1カラム指定を上書きして2カラムへ */
   #buy .buy-layout{
-    display: grid !important;
     grid-template-columns: 3fr 7fr !important; /* ← 30% : 70% */
-    gap: 8px !important;
-    align-items: start !important;
-  }
-
-  /* 以前の order 指定を無効化（左右並びの自然順に） */
-  #buy .buy-card{ order: 0 !important; }
-  #buy .buy-right{ order: 0 !important; }
-
-  /* テーブルは左カラム幅にフィット */
-  #buy .buy-table{
-    width: 100% !important;
-    table-layout: fixed !important;
-    margin-top: 8px !important;
-    border-collapse: separate !important;
-    border-spacing: 0 4px !important;
-  }
-
-  /* 右側の画像はカラム幅いっぱいで等倍描画 */
-  #buy .buy-right img,
-  #buy .buy-pop{
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    display: block !important;
-    object-fit: contain !important;
-    image-rendering: auto !important;
   }
 }
 </style>
