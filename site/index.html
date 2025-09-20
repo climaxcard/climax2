@@ -220,27 +220,36 @@
   .map-wrap{ margin-top:16px; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden; box-shadow:var(--soft); background:#fff; }
 
   /* ===== レスポンシブ ===== */
-  @media (max-width:900px){
-    header .h-inner{ padding:8px 12px; flex-direction:column; align-items:center; gap:6px; }
-    .brand{ order:0; width:100%; justify-content:center; }
-    .brand img{ height:44px; }
-    nav{ order:1; width:100%; display:flex; justify-content:center; gap:6px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
-    nav a{ padding:6px 8px; font-size:.9rem; white-space:nowrap; }
-    nav::-webkit-scrollbar{ display:none; } nav{ scrollbar-width:none; }
+@media (max-width:900px){
+  header .h-inner{ padding:8px 12px; flex-direction:column; align-items:center; gap:6px; }
+  .brand{ order:0; width:100%; justify-content:center; }
+  .brand img{ height:44px; }
+  nav{
+    order:1; width:100%; display:flex; justify-content:center; gap:6px;
+    flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px;
+  }
+  nav a{ padding:6px 8px; font-size:.9rem; white-space:nowrap; }
+  nav::-webkit-scrollbar{ display:none; } nav{ scrollbar-width:none; }
 
-    .titles{ padding:12px; }
-    .title-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
-    .title-card{ height:120px; border-radius:14px; }
-    .title-card img{ max-height:80px; }
+  .titles{ padding:12px; }
+  .title-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
+  .title-card{ height:120px; border-radius:14px; }
+  .title-card img{ max-height:80px; }
 
-    .event-row{ flex-direction:column; gap:12px; }
-    #events{ --schedule-lift:0px; }
-    #events .event-row .right{ margin-top:24px; justify-content:center; align-items:center; width:100%; }
-    #events .event-row .right .event-schedule,
-    #events .event-row .right > img{
-      margin-top:0; width:92%; max-width:520px; margin-left:auto; margin-right:auto; clip-path:none; position:static; z-index:auto;
-    }
-    #events .event-row .right .event-schedule img{ width:100%; height:auto; clip-path:none; }
+  .event-row{ flex-direction:column; gap:12px; }
+  #events{ --schedule-lift:0px; }
+  #events .event-row .right{ margin-top:24px; justify-content:center; align-items:center; width:100%; }
+  #events .event-row .right .event-schedule,
+  #events .event-row .right > img{
+    margin-top:0; width:92%; max-width:520px; margin-left:auto; margin-right:auto;
+    clip-path:none; position:static; z-index:auto;
+  }
+  #events .event-row .right .event-schedule img{ width:100%; height:auto; clip-path:none; }
+
+  /* ▼追加（ここが今回のポイント）：HOMEのPOP画像下の余白を消す */
+  #home .home-side .home-card{ display:block; line-height:0; }
+  #home .home-side .home-card img{ display:block; }
+}
 
     .storebuy-wrap{ width:100%; margin:0 auto; }
     .storebuy-right{ display:flex; flex-direction:column; gap:10px; }
