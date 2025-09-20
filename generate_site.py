@@ -799,6 +799,50 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
     word-break: break-word;
   }
 }
+/* === SP（～900px）: HOME 情報テーブルの収まり最適化（省略なし狙い） === */
+@media (max-width: 900px){
+  /* 横幅の稼ぎ：左右パディングを少しだけ削る */
+  #home .container{ padding-left: 12px; padding-right: 12px; }
+
+  /* テーブル全体をタイトに */
+  #home .info-table{
+    border-collapse: separate !important;
+    border-spacing: 0 3px !important;     /* 行間 8px → 3px */
+    font-size: .96em;                      /* 全体をほんの少し縮小 */
+  }
+
+  /* 見出し列をやや細く、本文側の幅を確保 */
+  #home .info-table th{
+    width: 6.2em !important;               /* 右セルへ面積を回す */
+    padding: 5px 8px !important;           /* 6x10 → 5x8 */
+    white-space: nowrap;
+  }
+  #home .info-table td{
+    padding: 5px 8px !important;           /* 6x10 → 5x8 */
+  }
+
+  /* アクセス文（3行以内）を収めやすく */
+  #home .info-table .clamp-3{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;                 /* 最大3行 */
+    overflow: hidden;
+    line-height: 1.28;                      /* 行間を少し詰める */
+    font-size: .95em;                       /* さらに微縮小 */
+    word-break: break-word;
+  }
+
+  /* 営業時間/買取受付時間（2行以内）を収めやすく */
+  #home .info-table .clamp-2{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;                 /* 最大2行 */
+    overflow: hidden;
+    line-height: 1.28;
+    font-size: .95em;                       /* さらに微縮小 */
+    word-break: break-word;
+  }
+}
 </style>
 </head>
 <body>
