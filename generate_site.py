@@ -469,29 +469,23 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
   }
   #events .event-row .right .event-schedule img{ width:100%; height:auto; clip-path:none; }
 
-  /* ▼追加（ここが今回のポイント）：HOMEのPOP画像下の余白を消す */
+  /* HOMEのPOP画像下の余白を消す */
   #home .home-side .home-card{ display:block; line-height:0; }
   #home .home-side .home-card img{ display:block; }
+
+  /* 店頭買取（StoreBuy）SPレイアウト */
+  .storebuy-wrap{ width:100%; margin:0 auto; }
+  .storebuy-right{ display:flex; flex-direction:column; gap:10px; }
+  .storebuy-right img, .storebuy-left img{
+    width:100%; height:auto; object-fit:contain; display:block; margin:0 auto;
+  }
+
+  /* 共通グリッドの1カラム化 */
+  .info-wrap{ grid-template-columns:1fr; }
+  .home-grid{ grid-template-columns:1fr; }
+  .duel-grid{ grid-template-columns:1fr; }
+  .duel-stack{ align-items:stretch; }
 }
-
-    .storebuy-wrap{ width:100%; margin:0 auto; }
-    .storebuy-right{ display:flex; flex-direction:column; gap:10px; }
-    .storebuy-right img, .storebuy-left img{ width:100%; height:auto; object-fit:contain; display:block; margin:0 auto; }
-
-    .info-wrap{ grid-template-columns:1fr; }
-    .home-grid{ grid-template-columns:1fr; }
-    .duel-grid{ grid-template-columns:1fr; }
-    .duel-stack{ align-items:stretch; }
-  }
-
-  @media (min-width:900px){
-    .storebuy-wrap{ display:flex; flex-direction:row; align-items:stretch; gap:20px; }
-    .storebuy-left, .storebuy-right{ flex:1 1 0; display:flex; flex-direction:column; }
-    .storebuy-left img{ width:100%; height:100%; object-fit:cover; }
-    .storebuy-right{ display:grid; grid-template-rows:1fr 1fr; gap:20px; }
-    .storebuy-right img{ width:100%; height:100%; object-fit:cover; }
-  }
-
   /* ===== Duel Space（安全版スタイル） ===== */
   #duel .duel-panel { box-sizing:border-box; overflow:visible !important; }
   .duel-badges, .badge { display:none !important; }
