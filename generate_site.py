@@ -1353,6 +1353,28 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
   apply();
   mq.addEventListener ? mq.addEventListener('change', apply) : window.addEventListener('resize', apply);
 })();
+/* === SP: yusoudragon を上下トリミングして大きく表示 === */
+@media (max-width: 900px){
+  /* 箱：高さを比率で固定してトリミングの土台にする */
+  #buy .buy-cta-link{
+    aspect-ratio: 16/7 !important;  /* 高さが低め＝上下を切る前提 */
+    height: auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* 画像：全面に敷いて“上下を切る” */
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;           /* ← これで上下がトリムされる */
+    object-position: 48% center !important; /* 右寄せ気味（必要に応じて 45～55% で微調整） */
+    clip-path: inset(12% 0 12% 0) !important; /* さらに上下を少し追加トリム（10～18%で調整） */
+    transform: none !important;             /* 以前の translate/scale は無効化 */
+  }
+}
 </script>
 </body>
 </html>

@@ -656,7 +656,7 @@
     <div class="container">
       <div class="home-grid">
         <div class="carousel" id="carousel" aria-roledescription="carousel">
-          <div class="track" id="track"><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide1.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide2.png" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide3.png" alt="HOMEスライド">  </a></div></div>
+          <div class="track" id="track"><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide1.PNG" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide2.PNG" alt="HOMEスライド">  </a></div><div class="slide fit">  <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ">    <img src="slide3.PNG" alt="HOMEスライド">  </a></div></div>
           <button class="ctrl prev" id="prev" aria-label="前へ">&#9664;</button>
           <button class="ctrl next" id="next" aria-label="次へ">&#9654;</button>
           <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
@@ -1130,6 +1130,28 @@
   apply();
   mq.addEventListener ? mq.addEventListener('change', apply) : window.addEventListener('resize', apply);
 })();
+/* === SP: yusoudragon を上下トリミングして大きく表示 === */
+@media (max-width: 900px){
+  /* 箱：高さを比率で固定してトリミングの土台にする */
+  #buy .buy-cta-link{
+    aspect-ratio: 16/7 !important;  /* 高さが低め＝上下を切る前提 */
+    height: auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* 画像：全面に敷いて“上下を切る” */
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;           /* ← これで上下がトリムされる */
+    object-position: 48% center !important; /* 右寄せ気味（必要に応じて 45～55% で微調整） */
+    clip-path: inset(12% 0 12% 0) !important; /* さらに上下を少し追加トリム（10～18%で調整） */
+    transform: none !important;             /* 以前の translate/scale は無効化 */
+  }
+}
 </script>
 </body>
 </html>
