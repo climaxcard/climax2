@@ -736,29 +736,6 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
     word-break: break-word;       /* 長文でもはみ出さない */
   }
 }
-/* === SP: yusoudragon を“見切れゼロ＆大きく”表示（固定比率を外す） === */
-@media (max-width: 900px){
-  #buy .buy-cta{ margin-top: 6px !important; }
-
-  /* 箱の固定比率を解除して高さを自動に */
-  #buy .buy-cta-link{
-    aspect-ratio: auto !important;
-    height: auto !important;
-  }
-
-  /* 画像は通常フローで 100% 幅・高さは自動。トリムや変形を無効化 */
-  #buy .buy-cta-img{
-    position: static !important;
-    inset: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-    object-position: center center !important;
-    clip-path: none !important;
-    transform: none !important;
-    image-rendering: auto !important;
-  }
-}
 
 /* === SP（～900px）: HOMEの「営業時間」「買取受付時間」を2行に収める === */
 @media (max-width: 900px){
@@ -849,6 +826,28 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
     word-break: break-word;
   }
 }
+/* === FINAL OVERRIDE: SP yusoudragon 強制トリム === */
+@media (max-width: 900px){
+  /* 箱は低め比率で上下を切る前提 */
+  #buy .buy-cta-link{
+    aspect-ratio: 16/7 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  /* 画像は全面に敷いて上下カット */
+  #buy .buy-cta-img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;            /* ← これで上下トリムの土台 */
+    object-position: 50% 50% !important;     /* 右に寄せたければ 52–55% に */
+    clip-path: inset(14% 0 14% 0) !important;/* ← ここで上下カット量を微調整(10–20%) */
+    transform: none !important;              /* 余計な拡大/平行移動は無効化 */
+  }
+}
+
 </style>
 </head>
 <body>
