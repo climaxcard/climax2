@@ -884,7 +884,9 @@ INDEX_HTML = Template(r"""<!DOCTYPE html>
           <div class="dots" id="dots">${DOTS_HTML}</div>
         </div>
         <div class="home-side" id="homeSide">
-          <a class="home-card navlink" data-section="storebuy" href="#storebuy"><img src="${POP_MYCALINKS_IMG}" alt="店頭買取案内"></a>
+          <a class="home-card navlink" data-section="buy" href="#buy">
+  <img src="${POP_MYCALINKS_IMG}" alt="郵送買取案内">
+</a>
           <a class="home-card" href="${SHOP_URL}" target="_blank"><img src="${POP_TOREKA_IMG}" alt="通販POP"></a>
         </div>
       </div>
