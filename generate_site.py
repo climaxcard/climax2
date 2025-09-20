@@ -1097,6 +1097,65 @@ show(location.hash.replace('#','')||'home', false);
   apply();
   mq.addEventListener ? mq.addEventListener('change', apply) : window.addEventListener('resize', apply);
 })();
+(function(){
+  function enhanceFor(thText){
+    const rows = Array.from(document.querySelectorAll('#home .info-table tr'));
+    const tr = rows.find(tr => {
+      const th = tr.querySelector('th');
+      return th && th.textContent.replace(/\s/g,'').includes(thText);
+    });
+    if(!tr) return;
+    const td = tr.querySelector('td');
+    if(!td || td.querySelector('.info-time')) return; // 既に変換済み
+
+    const raw = td.textContent.replace(/\s+/g,''); // 空白除去
+    const times = raw.match(/\d{1,2}:\d{2}～\d{1,2}:\d{2}/g);
+    if(!times || times.length < 2) return;
+
+    const idx1 = raw.indexOf(times[0]);
+    const idx2 = raw.indexOf(times[1]);
+
+    let label1 = raw.slice(0, idx1);
+    let label2 = raw.slice(idx1 + times[0].length, idx2);
+
+    const clean = (s)=>{
+      s = (s||'')
+        .replace(/[\d:～／/]/g,'')     // 時刻や区切りを除去
+        .replace(/曜日/g,'')
+        .replace(/^[・･\s]+|[・･\s]+$/g,'');
+      s = s.replace(/日[・･]?\s*祝/,'日・祝'); // 日祝/日・祝 を正規化
+      s = s.replace(/月～?土曜日?/,'月～土');  // 月～土曜日 → 月～土
+      if(!s) s = '月～土';
+      return s;
+    };
+
+    label1 = clean(label1);
+    label2 = clean(label2 || '日・祝');
+
+    // DOM構築（テンプレ内で `${}` が絡まないよう文字連結で生成）
+    const wrap = document.createElement('div');
+    wrap.className = 'info-time';
+
+    const r1 = document.createElement('div'); r1.className = 'row';
+    const l1 = document.createElement('span'); l1.className = 'label'; l1.textContent = label1;
+    const t1 = document.createElement('span'); t1.className = 'time';  t1.textContent = times[0];
+    r1.append(l1, t1);
+
+    const r2 = document.createElement('div'); r2.className = 'row';
+    const l2 = document.createElement('span'); l2.className = 'label'; l2.textContent = label2;
+    const t2 = document.createElement('span'); t2.className = 'time';  t2.textContent = times[1];
+    r2.append(l2, t2);
+
+    wrap.append(r1, r2);
+
+    // セル置換（元のテンプレは編集しない）
+    td.textContent = '';
+    td.appendChild(wrap);
+  }
+
+  enhanceFor('営業時間');
+  enhanceFor('買取受付時間');
+})();
 </script>
 </body>
 </html>
