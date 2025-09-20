@@ -611,7 +611,13 @@ nav a:hover{ background:rgba(0,0,0,.05); }
   /* はみ出しを防ぎたい場合は枠でクリップ（必要ならON） */
   /* #buy .buy-cta-link{ overflow: hidden !important; } */
 }
-
+@media (max-width: 900px){
+  #home .home-side img[src*="pop_mycalinks"],
+  #home .home-side img[src*="pop_toreka"]{
+    transform: scale(1.05) !important;
+    transform-origin: center center !important;
+  }
+}
 </style>
 </head>
 <body>
