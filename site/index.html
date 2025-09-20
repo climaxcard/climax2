@@ -495,10 +495,20 @@
     margin: 12px 12% 0 0 !important; /* 上12 / 右12% / 下0 / 左0 */
   }
 }
-/* === SP時：BUY 左右の幅だけ 30:70 にする（他は触らない） === */
+/* SP（～900px）で buy-table の列幅を 30:70 にする */
 @media (max-width: 900px){
-  #buy .buy-layout{
-    grid-template-columns: 3fr 7fr !important; /* ← 30% : 70% */
+  #buy .buy-table{
+    table-layout: fixed;         /* 列幅を固定的に解釈させる */
+    width: 100%;
+  }
+  #buy .buy-table th{
+    width: 28% !important;       /* 左カラム（ラベル）を狭く */
+    white-space: nowrap;          /* 「発送」などは1行で */
+    padding-right: 8px;           /* 右詰め気味で余白を軽く */
+  }
+  #buy .buy-table td{
+    width: 72% !important;       /* 右カラムを広く */
+    word-break: break-word;       /* 長文でもはみ出さない */
   }
 }
 </style>
