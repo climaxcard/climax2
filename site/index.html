@@ -370,6 +370,17 @@ nav a:hover{ background:rgba(0,0,0,.05); }
     transform: none !important;              /* 余計な拡大/平行移動は無効化 */
   }
 }
+/* === PATCH: SPだけ yusoudragon を 1.15x にする（最後に追記） === */
+@media (max-width: 900px){
+  /* 画像の拡大率だけを変える（1.20 → 1.15） */
+  #buy .buy-cta-img{
+    transform: translateX(1.5%) scale(1.15) !important;
+    transform-origin: center center !important;
+  }
+
+  /* はみ出しを防ぎたい場合は枠でクリップ（必要ならON） */
+  /* #buy .buy-cta-link{ overflow: hidden !important; } */
+}
 
 </style>
 </head>
