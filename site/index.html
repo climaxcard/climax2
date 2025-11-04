@@ -388,6 +388,329 @@ nav a:hover{ background:rgba(0,0,0,.05); }
     transform-origin: center center !important;
   }
 }
+/* ============================================================
+   🎨 CLIMAX風デザインテーマ（赤×白×金・光沢＋躍動感）
+   - ブランドカラー：#dc2626（赤） #fff（白） #ffd700（金）
+   - 輝き・グラデーション・影で立体感を演出
+   ============================================================ */
+
+/* --- 全体背景を微暖色に（真っ白より柔らかい） --- */
+body {
+  background: linear-gradient(180deg, #fff 0%, #fff9f9 50%, #fff 100%);
+  color: #111;
+}
+
+/* --- 見出し（セクションタイトル）: 金×赤のグラデ＋下線 --- */
+h2 {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: 1.6em;
+  background: linear-gradient(90deg, #dc2626 0%, #ffb800 50%, #dc2626 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ffb800, #dc2626);
+  border-radius: 4px;
+}
+
+/* --- ナビゲーション：グロウ＆アクティブ赤下線 --- */
+header {
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(220,38,38,0.1);
+}
+header nav a {
+  position: relative;
+  font-weight: 800;
+  transition: color 0.2s, transform 0.2s;
+}
+header nav a:hover {
+  color: #dc2626;
+  transform: translateY(-2px);
+}
+header nav a.nav-active {
+  color: #dc2626;
+}
+header nav a.nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #dc2626);
+  border-radius: 2px;
+}
+
+/* --- CTAボタン（通販サイトなど）: 赤グラデ＋光沢＋hover発光 --- */
+.cta {
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff !important;
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 10px rgba(220,38,38,.4);
+  transition: all 0.3s ease;
+}
+.cta:hover {
+  background: linear-gradient(180deg, #ff3030 0%, #c42020 100%);
+  box-shadow: 0 0 20px rgba(255,0,0,.6), 0 0 8px rgba(255,215,0,.5);
+  transform: scale(1.05);
+}
+
+/* --- HOMEカルーセル：外枠に金の淡い輝き --- */
+.carousel {
+  border: 2px solid #ffd700;
+  box-shadow: 0 6px 20px rgba(220,38,38,0.15);
+}
+.dot.active {
+  background: #ffd700 !important;
+  border-color: #dc2626 !important;
+}
+
+/* --- タイトルカード：ホログラム風の虹彩エフェクト --- */
+.title-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255,215,0,0.4);
+  box-shadow: 0 6px 18px rgba(220,38,38,0.08);
+  background: linear-gradient(135deg, #fff 0%, #fff9f9 50%, #fff 100%);
+  transition: all 0.4s ease;
+}
+.title-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(255,215,0,0.6), 0 0 6px rgba(220,38,38,0.4);
+}
+.title-card::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  animation: hologlow 3s infinite linear;
+}
+@keyframes hologlow {
+  100% { transform: translate(100%, 100%); }
+}
+
+/* --- 買取ボタン yusoudragon（BUY CTA）に赤金輝き枠 --- */
+#buy .buy-cta-link {
+  border: 3px solid #ffd700;
+  border-radius: 12px;
+  box-shadow: 0 0 16px rgba(255,215,0,.4);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#buy .buy-cta-link:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(255,215,0,.7), 0 0 12px rgba(220,38,38,.4);
+}
+
+/* --- 見出しパネルや枠にゴールドライン --- */
+.panel {
+  border: 2px solid rgba(255,215,0,0.3);
+  box-shadow: 0 8px 24px rgba(220,38,38,0.08);
+}
+
+/* --- ボタン系共通 --- */
+.btn-outline {
+  border: 2px solid #dc2626;
+  color: #dc2626;
+  transition: all .2s ease;
+}
+.btn-outline:hover {
+  background: #dc2626;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255,215,0,.6);
+}
+
+/* --- フッター風ボトムバー（あれば）に細い金線 --- */
+footer {
+  border-top: 2px solid #ffd700;
+  background: #fff;
+  padding: 12px;
+  text-align: center;
+  font-size: .9rem;
+  color: #444;
+}
+
+/* --- X/LINEアイコンを赤金のリングで強調 --- */
+.x-icon-img, .line-icon-img {
+  border: 2px solid rgba(255,215,0,.6);
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(255,215,0,.4);
+  background: #fff;
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+.x-icon-img:hover, .line-icon-img:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(255,215,0,.8);
+}
+
+/* --- デュエルスペース画像にも金縁 --- */
+.duel-image {
+  border: 2px solid #ffd700 !important;
+  box-shadow: 0 4px 12px rgba(220,38,38,0.15);
+}
+
+/* --- アニメーションスピード調整: “呼吸する光” --- */
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 6px rgba(255,215,0,.4); }
+  50% { box-shadow: 0 0 18px rgba(255,215,0,.7); }
+}
+.carousel, .title-card:hover, .cta:hover {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+/* ============================================================
+   🎠 CLIMAX風 TOPカルーセル強化版（赤金グラデ背景＋光エフェクト）
+   ============================================================ */
+
+/* --- カルーセル外枠を赤金フレームに --- */
+.carousel {
+  position: relative;
+  border: 3px solid transparent;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #dc2626, #ffb800);
+  background-origin: border-box;
+  box-shadow: 0 0 24px rgba(220,38,38,.25), 0 0 12px rgba(255,215,0,.3);
+  overflow: hidden;
+}
+
+/* --- 内部スライドを白いマット調に（派手すぎない） --- */
+.carousel .slide.fit {
+  background: radial-gradient(circle at center, #ffffff 70%, #fff6f6 100%);
+  border-radius: 14px;
+}
+
+/* --- 背景にゆらめく赤金グラデーション光 --- */
+.carousel::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(from 0deg, #ffb800, #dc2626, #ffb800);
+  opacity: 0.18;
+  filter: blur(60px);
+  animation: rotateGlow 10s linear infinite;
+  z-index: 0;
+}
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- スライド画像の上にうっすらホログラムライン --- */
+.carousel .slide.fit::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -50%;
+  width: 200%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shineAcross 8s infinite linear;
+  pointer-events: none;
+}
+@keyframes shineAcross {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* --- 矢印をより“CLIMAXカラー”に --- */
+.carousel .ctrl {
+  background: rgba(220,38,38,.7);
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 10px rgba(255,215,0,.4);
+  transition: all 0.25s;
+}
+.carousel .ctrl:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,215,0,.6);
+}
+
+/* --- ドットのアクティブ時に金色に発光 --- */
+.dot.active {
+  background: #ffd700 !important;
+  box-shadow: 0 0 10px rgba(255,215,0,.6);
+}
+/* ============================================================
+   💎 CLIMAX風 ホログラムボタン／文字エフェクト（共通パッチ）
+   ============================================================ */
+
+/* --- 全ボタン・リンクを対象（通販サイト・買取表など） --- */
+a.btn, .cta, .buy-cta-link, nav a.cta {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #dc2626, #ffb800, #dc2626);
+  background-size: 300%;
+  color: #fff !important;
+  text-shadow: 0 0 8px rgba(255,215,0,.6);
+  animation: holoFlow 5s linear infinite;
+  border: 2px solid #ffd700;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(255,215,0,.4);
+  transition: transform .2s, box-shadow .3s;
+}
+a.btn:hover, .cta:hover, .buy-cta-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,215,0,.7), 0 0 12px rgba(220,38,38,.4);
+}
+
+/* --- ホログラムっぽく虹色が流れる --- */
+@keyframes holoFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* --- 文字が角度で光るように見せる --- */
+.holo-text {
+  display: inline-block;
+  background: linear-gradient(120deg, #dc2626, #ffb800, #dc2626);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holoTextFlow 4s linear infinite;
+  font-weight: 900;
+}
+@keyframes holoTextFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* --- 買取表ボタン (yusoudragon) も光る --- */
+#buy .buy-cta-link {
+  animation: holoFlow 8s linear infinite;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 24px rgba(255,215,0,.5);
+}
+#buy .buy-cta-link:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 28px rgba(255,215,0,.8), 0 0 14px rgba(220,38,38,.5);
+}
+
+/* --- ホバー時にキラッとラインを走らせる --- */
+a.btn::after, .cta::after, .buy-cta-link::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.6), transparent);
+  transform: skewX(-20deg);
+  animation: holoShine 3s infinite ease-in-out;
+}
+@keyframes holoShine {
+  0%, 80% { left: -75%; opacity: 0; }
+  90% { left: 120%; opacity: 1; }
+  100% { left: 120%; opacity: 0; }
+}
+
 </style>
 </head>
 <body>
@@ -416,7 +739,7 @@ nav a:hover{ background:rgba(0,0,0,.05); }
     <div class="container">
       <div class="home-grid">
         <div class="carousel" id="carousel" aria-roledescription="carousel">
-          <div class="track" id="track"><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide1.PNG" alt="HOMEスライド"> </a></div><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide2.PNG" alt="HOMEスライド"> </a></div><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide3.PNG" alt="HOMEスライド"> </a></div></div>
+          <div class="track" id="track"><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide1.png" alt="HOMEスライド"> </a></div><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide2.png" alt="HOMEスライド"> </a></div><div class="slide fit"> <a class="slide-link" href="https://www.climax-card.jp/product-list/345" target="_blank" rel="noopener" aria-label="商品一覧へ"> <img src="slide3.png" alt="HOMEスライド"> </a></div></div>
           <button class="ctrl prev" id="prev" aria-label="前へ">&#9664;</button>
           <button class="ctrl next" id="next" aria-label="次へ">&#9654;</button>
           <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
